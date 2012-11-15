@@ -24,15 +24,8 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateConcrete()
     {
-        $entityStub = $entityStub = $this->getMockForAbstractClass(
-            'Obiz\Common\Entity');
-
         $entityProviderStub = $this->getMock(
             'Obiz\Common\Persistence\Provider\DrupalProvider');
-
-        $entityProviderStub->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($entityStub));
 
         $stub = $this->getMockForAbstractClass(
             'Obiz\Common\Persistence\EntityRepository', array(
@@ -41,5 +34,26 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertInstanceOf('Obiz\Common\Persistence\EntityRepository', $stub);
+    }
+
+    public function testGetWhenConcreteProviderReturnsObject()
+    {
+        $entityStub = $entityStub = $this->getMockForAbstractClass(
+            'Obiz\Common\Entity');
+
+        $entityProviderStub = $this->getMock(
+            'Obiz\Common\Persistence\Provider\DrupalProvider');
+
+        $entityProviderStub->expects($this->any())
+                           ->method('get')
+                           ->will($this->returnValue($entityStub));
+
+        $stub = $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\EntityRepository', array(
+            'Obiz\Common\Entity',
+            $entityProviderStub
+        ));
+
+        $this->assertInstanceOf('Obiz\Common\Entity', $stub->get(1));
     }
 }

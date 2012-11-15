@@ -37,6 +37,7 @@ abstract class EntityRepository
      *
      * @param $id
      * @return \Obiz\Common\Entity
+     * @throws \Obiz\Common\Entity\Exception\NotFoundException
      */
     public function get($id)
     {

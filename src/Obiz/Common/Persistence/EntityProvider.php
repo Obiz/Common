@@ -15,6 +15,7 @@ interface EntityProvider
      * @param int $id
      * @param string $entityClassNamespace
      * @return \Obiz\Common\Entity
+     * @throws \Obiz\Common\Entity\Exception\NotFoundException
      */
     public function get($id, $entityClassNamespace);
 }
