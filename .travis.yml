@@ -2,7 +2,7 @@ language: php
 script: phpunit -c tests/phpunit.xml.dist --verbose --coverage-text tests/
 
 php:
-  - 5.3.2
+  - 5.3
 
 before_script:
   - "composer install -v"
