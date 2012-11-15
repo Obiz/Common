@@ -17,6 +17,7 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
+        
         $this->drupalProviderStub = $this->getMockForAbstractClass(
             'Obiz\Common\Persistence\Provider\DrupalProvider');
     }
