@@ -12,9 +12,11 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetWhenConcreteProviderReturnsObject()
+    public function testGetWhenConcreteProviderFindsRecord()
     {
-        $stub = $this->getDrupalProviderStub();
+        $stub = $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\Provider\DrupalProvider');
+
         $entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
 
         $stub->expects($this->any())
@@ -25,12 +27,15 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
             $stub->get(1, 'Obiz\Common\Entity'));
     }
 
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getDrupalProviderStub()
+    public function testGetWhenConcreteProviderDoesNotFindRecord()
     {
-        return $this->getMockForAbstractClass(
+        $stub = $this->getMockForAbstractClass(
             'Obiz\Common\Persistence\Provider\DrupalProvider');
+
+        $stub->expects($this->any())
+            ->method('nodeToEntity')
+            ->will($this->returnValue(false));
+
+        $this->assertFalse($stub->get(1, 'Obiz\Common\Entity'));
     }
 }
