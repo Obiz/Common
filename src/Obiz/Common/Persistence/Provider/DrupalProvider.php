@@ -1,6 +1,6 @@
 <?php
 
-namespace Obiz\Common\Repository;
+namespace Obiz\Common\Persistence\Provider;
 
 use Obiz\Common\Persistence\EntityProvider;
 use Obiz\Common\Entity\Exception\NotFoundException;
