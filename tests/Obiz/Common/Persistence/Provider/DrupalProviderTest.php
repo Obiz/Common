@@ -12,17 +12,51 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function concreteProviderInvalidReturnValues()
+    {
+        return array(
+            array(null),
+            array(true),
+            array(false),
+            array('foo'),
+            array(array('foo' => 'bar'))
+        );
+    }
+
     /**
+     * @dataProvider concreteProviderInvalidReturnValues
      * @expectedException \Obiz\Common\Entity\Exception\NotFoundException
      */
-    public function testGetThrowsExceptionWhenConcreteProviderReturnsFalse()
+    public function testGetThrowsException($returnValue)
     {
-        $stub = $this->getMock('Obiz\Common\Persistence\Provider\DrupalProvider');
+        $stub = $this->getDrupalProviderStub();
 
         $stub->expects($this->any())
              ->method('nodeToEntity')
-             ->will($this->returnValue(FALSE));
+             ->will($this->returnValue($returnValue));
 
-        $stub->get(1, 'EntityClassNamespace');
+        $stub->get(1, 'Obiz\Common\Entity');
+    }
+
+    public function testGetWhenConcreteProviderReturnsObject()
+    {
+        $stub = $this->getDrupalProviderStub();
+        $entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
+
+        $stub->expects($this->any())
+            ->method('nodeToEntity')
+            ->will($this->returnValue($entityStub));
+
+        $this->assertInstanceOf('Obiz\Common\Entity',
+            $stub->get(1, 'Obiz\Common\Entity'));
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getDrupalProviderStub()
+    {
+        return $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\Provider\DrupalProvider');
     }
 }

@@ -10,10 +10,12 @@
 			"email": "daniel@obiz.com.br"
 		}
 	],
+    "require": {
+        "php": ">=5.3.3"
+    },
 	"require-dev": {
-		"phpunit/phpunit": "*",
-		"phpunit/phpunit-mock-objects": "*",
-		"phpunit/php-code-coverage": "*"
+		"phpunit/phpunit": "3.7.x-dev",
+		"phpunit/phpunit-mock-objects": "1.2.x-dev"
 	},
 	"autoload": {
 		"psr-0": { "Obiz\\Common\\": "src/" }

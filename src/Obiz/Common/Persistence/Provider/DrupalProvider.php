@@ -4,6 +4,7 @@ namespace Obiz\Common\Persistence\Provider;
 
 use Obiz\Common\Persistence\EntityProvider;
 use Obiz\Common\Entity\Exception\NotFoundException;
+use Obiz\Common\Entity;
 
 /**
  * Abstract provider for data access and persistence based on Drupal's data
@@ -21,7 +22,7 @@ abstract class DrupalProvider implements EntityProvider
     {
         $entity = $this->nodeToEntity($id, $entityClassNamespace);
 
-        if(!$entity) {
+        if(!$entity instanceof Entity) {
             throw new NotFoundException();
         }
 
