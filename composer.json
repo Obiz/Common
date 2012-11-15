@@ -1,24 +1,24 @@
 {
-	"name": "obiz/common",
-	"type": "library",
-	"description": "Common Library for Obiz projects",
-	"keywords": ["collections", "spl", "eventmanager", "annotations", "persistence"],
-	"homepage": "http://www.obiz.com.br",
-	"authors": [
-		{
-			"name": "Daniel Ribeiro",
-			"email": "daniel@obiz.com.br"
-		}
-	],
+    "name": "obiz/common",
+    "type": "library",
+    "description": "Common Library for Obiz projects",
+    "keywords": ["collections", "spl", "eventmanager", "annotations", "persistence"],
+    "homepage": "http://www.obiz.com.br",
+    "authors": [
+        {
+            "name": "Daniel Ribeiro",
+            "email": "daniel@obiz.com.br"
+        }
+    ],
     "require": {
         "php": ">=5.3.3"
     },
-	"require-dev": {
-		"phpunit/phpunit": "3.7.x-dev",
-		"phpunit/phpunit-mock-objects": "1.2.x-dev"
-	},
-	"autoload": {
-		"psr-0": { "Obiz\\Common\\": "src/" }
-	},
-	"minimum-stability": "dev"
+    "require-dev": {
+        "phpunit/phpunit": "3.7.x-dev",
+        "phpunit/phpunit-mock-objects": "1.2.x-dev"
+    },
+    "autoload": {
+        "psr-0": { "Obiz\\Common\\": "src/" }
+    },
+    "minimum-stability": "dev"
 }
