@@ -35,7 +35,7 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetMethodWhenDrupalProviderReturnsObject()
+    public function testGetMethodWhenDrupalProviderReturnsEntity()
     {
         $this->drupalProviderStub->expects($this->once())
                                  ->method('nodeToEntity')
@@ -45,7 +45,7 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
             $this->drupalProviderStub->get(1, 'Obiz\Common\Entity'));
     }
 
-    public function testGetMethodWhenDrupalProviderReturnsNonObject()
+    public function testGetMethodWhenDrupalProviderReturnsNonEntity()
     {
         $this->drupalProviderStub->expects($this->once())
                                  ->method('nodeToEntity')
