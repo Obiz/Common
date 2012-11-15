@@ -15,12 +15,12 @@ abstract class EntityRepository
     /**
      * @var string
      */
-    protected $_entity;
+    protected $entity;
 
     /**
      * @var \Obiz\Common\Persistence\EntityProvider
      */
-    protected $_provider;
+    protected $provider;
 
     /**
      * @param string $entity
@@ -28,8 +28,8 @@ abstract class EntityRepository
      */
     public function __construct($entity, EntityProvider $provider)
     {
-        $this->_entity   = $entity;
-        $this->_provider = $provider;
+        $this->entity   = $entity;
+        $this->provider = $provider;
     }
 
     /**
@@ -41,6 +41,6 @@ abstract class EntityRepository
      */
     public function get($id)
     {
-        return $this->_provider->get($id, $this->_entity);
+        return $this->provider->get($id, $this->entity);
     }
 }
