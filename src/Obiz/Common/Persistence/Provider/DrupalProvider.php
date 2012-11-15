@@ -20,13 +20,7 @@ abstract class DrupalProvider implements EntityProvider
      */
     public function get($id, $entityClassNamespace)
     {
-        $entity = $this->nodeToEntity($id, $entityClassNamespace);
-
-        if(!$entity instanceof Entity) {
-            throw new NotFoundException();
-        }
-
-        return $entity;
+        return $this->nodeToEntity($id, $entityClassNamespace);
     }
 
     /**
@@ -34,7 +28,7 @@ abstract class DrupalProvider implements EntityProvider
      *
      * @param int $nid The node id
      * @param string $entityClassNamespace The entity class namespace
-     * @return \Obiz\Common\Entity
+     * @return mixed The entity, if found, and false otherwise
      */
     abstract public function nodeToEntity($nid, $entityClassNamespace);
 }

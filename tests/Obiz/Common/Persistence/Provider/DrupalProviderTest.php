@@ -12,32 +12,6 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function concreteProviderInvalidReturnValues()
-    {
-        return array(
-            array(null),
-            array(true),
-            array(false),
-            array('foo'),
-            array(array('foo' => 'bar'))
-        );
-    }
-
-    /**
-     * @dataProvider concreteProviderInvalidReturnValues
-     * @expectedException \Obiz\Common\Entity\Exception\NotFoundException
-     */
-    public function testGetThrowsException($returnValue)
-    {
-        $stub = $this->getDrupalProviderStub();
-
-        $stub->expects($this->any())
-             ->method('nodeToEntity')
-             ->will($this->returnValue($returnValue));
-
-        $stub->get(1, 'Obiz\Common\Entity');
-    }
-
     public function testGetWhenConcreteProviderReturnsObject()
     {
         $stub = $this->getDrupalProviderStub();

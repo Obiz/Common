@@ -4,6 +4,7 @@ namespace Obiz\Common\Persistence;
 
 use Obiz\Common\Persistence\EntityProvider;
 use Obiz\Common\Entity;
+use Obiz\Common\Entity\Exception\NotFoundException;
 
 /**
  * Entity repository that provides a set of useful data fecthing methods.
@@ -35,12 +36,18 @@ abstract class EntityRepository
     /**
      * Find one database record and return it as an Entity.
      *
-     * @param $id
-     * @return \Obiz\Common\Entity
+     * @param int $id The record id
      * @throws \Obiz\Common\Entity\Exception\NotFoundException
+     * @return \Obiz\Common\Entity
      */
     public function get($id)
     {
-        return $this->provider->get($id, $this->entity);
+        $entity = $this->provider->get($id, $this->entity);
+
+        if(!$entity instanceof Entity) {
+            throw new NotFoundException();
+        }
+
+        return $entity;
     }
 }
