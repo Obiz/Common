@@ -25,8 +25,8 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
 
-        $this->entityProviderStub = $this->getMock(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
+        $this->entityProviderStub = $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\EntityProvider');
 
         $this->entityRepositoryStub = $this->getMockForAbstractClass(
             'Obiz\Common\Persistence\EntityRepository', array(
@@ -55,6 +55,16 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function assertPreConditions()
     {
+        $this->assertTrue(
+            $interface = interface_exists('Obiz\Common\Entity'),
+            'Interface not found: ' . $interface
+        );
+
+        $this->assertTrue(
+            $interface = interface_exists('Obiz\Common\Persistence\EntityProvider'),
+            'Interface not found: ' . $interface
+        );
+
         $this->assertTrue(
             $class = class_exists('Obiz\Common\Persistence\EntityRepository'),
             'Class not found: ' . $class

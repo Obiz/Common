@@ -30,6 +30,11 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
     public function assertPreConditions()
     {
         $this->assertTrue(
+            $class = interface_exists('Obiz\Common\Entity'),
+            'Class not found: ' . $class
+        );
+
+        $this->assertTrue(
             $class = class_exists('Obiz\Common\Persistence\Provider\DrupalProvider'),
             'Class not found: ' . $class
         );
