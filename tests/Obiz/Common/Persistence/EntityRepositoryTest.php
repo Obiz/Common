@@ -6,6 +6,42 @@ use Obiz\Common\Persistence\EntityProvider;
 
 class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $entityStub;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $entityProviderStub;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $entityRepositoryStub;
+
+    public function setUp()
+    {
+        $this->entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
+
+        $this->entityProviderStub = $this->getMock(
+            'Obiz\Common\Persistence\Provider\DrupalProvider');
+
+        $this->entityRepositoryStub = $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\EntityRepository', array(
+            'Obiz\Common\Entity',
+            $this->entityProviderStub
+        ));
+    }
+
+    public function tearDown()
+    {
+        unset($this->entityStub);
+        unset($this->entityProviderStub);
+        unset($this->entityRepositoryStub);
+    }
+
     public function concreteProviderInvalidReturnValues()
     {
         return array(
@@ -25,67 +61,41 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testInstantiateConcreteEntityRepository()
+    {
+        $this->assertInstanceOf('Obiz\Common\Persistence\EntityRepository',
+            $this->entityRepositoryStub);
+    }
+
     /**
      * @expectedException \Exception
      */
-    public function testInstantiateConcreteWithoutArgumentsThrowsException()
+    public function testInstantiateConcreteEntityRepositoryWithoutArgumentsThrowsException()
     {
         $this->getMockForAbstractClass('Obiz\Common\Persistence\EntityRepository');
     }
 
-    public function testInstantiateConcrete()
+    public function testGetMethodWhenConcreteProviderReturnsObject()
     {
-        $entityProviderStub = $this->getMock(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
+        $this->entityProviderStub->expects($this->once())
+            ->method('get')
+            ->will($this->returnValue($this->entityStub));
 
-        $stub = $this->getMockForAbstractClass(
-            'Obiz\Common\Persistence\EntityRepository', array(
-            'Obiz\Common\Entity',
-            $entityProviderStub
-        ));
-
-        $this->assertInstanceOf('Obiz\Common\Persistence\EntityRepository', $stub);
+        $this->assertInstanceOf(
+            'Obiz\Common\Entity', $this->entityRepositoryStub->get(1));
     }
 
     /**
      * @dataProvider concreteProviderInvalidReturnValues
      * @expectedException \Obiz\Common\Entity\Exception\NotFoundException
      */
-    public function testGetThrowsException($returnValue)
+    public function testGetMethodThrowsExceptionWhenConcreteProviderReturnsNonObject($returnValue)
     {
-        $entityProviderStub = $this->getMock(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
-
-        $entityProviderStub->expects($this->any())
+        $this->entityProviderStub->expects($this->once())
             ->method('get')
             ->will($this->returnValue($returnValue));
 
-        $stub = $this->getMockForAbstractClass(
-            'Obiz\Common\Persistence\EntityRepository', array(
-            'Obiz\Common\Entity',
-            $entityProviderStub
-        ));
-
-        $this->assertInstanceOf('Obiz\Common\Entity', $stub->get(1));
-    }
-
-    public function testGetWhenConcreteProviderReturnsObject()
-    {
-        $entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
-
-        $entityProviderStub = $this->getMock(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
-
-        $entityProviderStub->expects($this->any())
-                           ->method('get')
-                           ->will($this->returnValue($entityStub));
-
-        $stub = $this->getMockForAbstractClass(
-            'Obiz\Common\Persistence\EntityRepository', array(
-            'Obiz\Common\Entity',
-            $entityProviderStub
-        ));
-
-        $this->assertInstanceOf('Obiz\Common\Entity', $stub->get(1));
+        $this->assertInstanceOf(
+            'Obiz\Common\Entity', $this->entityRepositoryStub->get(1));
     }
 }
