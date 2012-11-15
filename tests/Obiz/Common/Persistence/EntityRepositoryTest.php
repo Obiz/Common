@@ -75,7 +75,7 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->getMockForAbstractClass('Obiz\Common\Persistence\EntityRepository');
     }
 
-    public function testGetMethodWhenConcreteProviderReturnsObject()
+    public function testGetMethodWhenConcreteProviderReturnsEntity()
     {
         $this->entityProviderStub->expects($this->once())
             ->method('get')
@@ -89,7 +89,7 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
      * @dataProvider concreteProviderInvalidReturnValues
      * @expectedException \Obiz\Common\Entity\Exception\NotFoundException
      */
-    public function testGetMethodThrowsExceptionWhenConcreteProviderReturnsNonObject($returnValue)
+    public function testGetMethodThrowsExceptionWhenConcreteProviderReturnsNonEntity($returnValue)
     {
         $this->entityProviderStub->expects($this->once())
             ->method('get')

@@ -4,6 +4,29 @@ namespace Obiz\Common\Persistence\Provider;
 
 class DrupalProviderTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $entityStub;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $drupalProviderStub;
+
+    public function setUp()
+    {
+        $this->entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
+        $this->drupalProviderStub = $this->getMockForAbstractClass(
+            'Obiz\Common\Persistence\Provider\DrupalProvider');
+    }
+
+    public function tearDown()
+    {
+        unset($this->entityStub);
+        unset($this->drupalProviderStub);
+    }
+
     public function assertPreConditions()
     {
         $this->assertTrue(
@@ -12,30 +35,22 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetWhenConcreteProviderFindsRecord()
+    public function testGetMethodWhenDrupalProviderReturnsObject()
     {
-        $stub = $this->getMockForAbstractClass(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
-
-        $entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
-
-        $stub->expects($this->any())
-             ->method('nodeToEntity')
-             ->will($this->returnValue($entityStub));
+        $this->drupalProviderStub->expects($this->once())
+                                 ->method('nodeToEntity')
+                                 ->will($this->returnValue($this->entityStub));
 
         $this->assertInstanceOf('Obiz\Common\Entity',
-            $stub->get(1, 'Obiz\Common\Entity'));
+            $this->drupalProviderStub->get(1, 'Obiz\Common\Entity'));
     }
 
-    public function testGetWhenConcreteProviderDoesNotFindRecord()
+    public function testGetMethodWhenDrupalProviderReturnsNonObject()
     {
-        $stub = $this->getMockForAbstractClass(
-            'Obiz\Common\Persistence\Provider\DrupalProvider');
+        $this->drupalProviderStub->expects($this->once())
+                                 ->method('nodeToEntity')
+                                 ->will($this->returnValue(false));
 
-        $stub->expects($this->any())
-            ->method('nodeToEntity')
-            ->will($this->returnValue(false));
-
-        $this->assertFalse($stub->get(1, 'Obiz\Common\Entity'));
+        $this->assertFalse($this->drupalProviderStub->get(1, 'Obiz\Common\Entity'));
     }
 }
