@@ -24,8 +24,15 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateConcrete()
     {
+        $entityStub = $entityStub = $this->getMockForAbstractClass(
+            'Obiz\Common\Entity');
+
         $entityProviderStub = $this->getMock(
             'Obiz\Common\Persistence\Provider\DrupalProvider');
+
+        $entityProviderStub->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($entityStub));
 
         $stub = $this->getMockForAbstractClass(
             'Obiz\Common\Persistence\EntityRepository', array(

@@ -3,6 +3,7 @@
 namespace Obiz\Common\Persistence;
 
 use Obiz\Common\Persistence\EntityProvider;
+use Obiz\Common\Entity;
 
 /**
  * Entity repository that provides a set of useful data fecthing methods.

@@ -44,8 +44,8 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         $entityStub = $this->getMockForAbstractClass('Obiz\Common\Entity');
 
         $stub->expects($this->any())
-            ->method('nodeToEntity')
-            ->will($this->returnValue($entityStub));
+             ->method('nodeToEntity')
+             ->will($this->returnValue($entityStub));
 
         $this->assertInstanceOf('Obiz\Common\Entity',
             $stub->get(1, 'Obiz\Common\Entity'));
