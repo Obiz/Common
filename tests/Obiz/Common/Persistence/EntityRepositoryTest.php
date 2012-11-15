@@ -56,17 +56,22 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
     public function assertPreConditions()
     {
         $this->assertTrue(
-            $interface = interface_exists('Obiz\Common\Entity'),
+            interface_exists($interface = 'Obiz\Common\Entity'),
             'Interface not found: ' . $interface
         );
 
         $this->assertTrue(
-            $interface = interface_exists('Obiz\Common\Persistence\EntityProvider'),
+            interface_exists($interface = 'Obiz\Common\Persistence\EntityProvider'),
             'Interface not found: ' . $interface
         );
 
         $this->assertTrue(
-            $class = class_exists('Obiz\Common\Persistence\EntityRepository'),
+            class_exists($class = 'Obiz\Common\Entity\Exception\NotFoundException'),
+            'Class not found: ' . $class
+        );
+
+        $this->assertTrue(
+            class_exists($class = 'Obiz\Common\Persistence\EntityRepository'),
             'Class not found: ' . $class
         );
     }
