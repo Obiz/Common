@@ -1,6 +1,6 @@
 <?php
 
-namespace Obiz\Common\Persistence\Provider;
+namespace Obiz\Common\Persistence\Strategy;
 
 use Obiz\Common\Persistence\StrategyProvider;
 

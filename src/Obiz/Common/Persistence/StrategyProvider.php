@@ -3,7 +3,7 @@
 namespace Obiz\Common\Persistence;
 
 /**
- * Provider interface for different data access and persistence strategies.
+ * Strategy interface for different data access and persistence strategies.
  *
  * @author Daniel Ribeiro <daniel@obiz.com.br>
  */

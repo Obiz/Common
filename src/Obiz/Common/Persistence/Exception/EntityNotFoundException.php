@@ -1,6 +1,6 @@
 <?php
 
-namespace Obiz\Common\Entity\Exception;
+namespace Obiz\Common\Persistence\Exception;
 
 use \Exception;
 
@@ -9,5 +9,5 @@ use \Exception;
  *
  * @author Daniel Ribeiro <daniel@obiz.com.br>
  */
-class NotFoundException extends Exception
+class EntityNotFoundException extends Exception
 {}
