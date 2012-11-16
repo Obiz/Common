@@ -2,16 +2,16 @@
 
 namespace Obiz\Common\Persistence\Provider;
 
-use Obiz\Common\Persistence\EntityProvider;
+use Obiz\Common\Persistence\StrategyProvider;
 
 /**
  * Abstract provider for data access and persistence based on Drupal's data
  * model. This class provides the basic strategy interface necessary for a
- * specific entity provider to implement.
+ * specific strategy provider to implement.
  *
  * @author Daniel Ribeiro <daniel@obiz.com.br>
  */
-abstract class DrupalProvider implements EntityProvider
+abstract class DrupalProvider implements StrategyProvider
 {
     /**
      * {@inheritdoc}

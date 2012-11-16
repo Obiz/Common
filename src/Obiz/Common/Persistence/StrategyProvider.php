@@ -7,7 +7,7 @@ namespace Obiz\Common\Persistence;
  *
  * @author Daniel Ribeiro <daniel@obiz.com.br>
  */
-interface EntityProvider
+interface StrategyProvider
 {
     /**
      * Find one database record and return it as an Entity.
