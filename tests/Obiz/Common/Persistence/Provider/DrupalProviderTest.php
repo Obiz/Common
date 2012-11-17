@@ -31,7 +31,7 @@ class DrupalProviderTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetMethodWhenConcreteProviderReturnsEntity()
+    public function testGetMethodWhenDrupalProviderReturnsEntity()
     {
         $this->concreteDrupalProvider->expects($this->once())
              ->method('nodeToEntity')

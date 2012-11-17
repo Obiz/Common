@@ -127,7 +127,7 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
      * @dataProvider strategyProviderInvalidReturnValues
      * @expectedException \Doctrine\ORM\EntityNotFoundException
      */
-    public function testGetMethodThrowsExceptionWhenConcreteStrategyReturnsNonEntity($returnValue)
+    public function testGetMethodThrowsExceptionWhenStrategyReturnsNonEntity($returnValue)
     {
         $this->strategyProvider
              ->expects($this->once())
