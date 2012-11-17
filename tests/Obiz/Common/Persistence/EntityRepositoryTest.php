@@ -31,8 +31,7 @@ class EntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->entity =
-            $this->getMockForAbstractClass('Obiz\Common\Entity');
+        $this->entity = $this->getMockForAbstractClass('Obiz\Common\Entity');
 
         $this->entityManager =
             $this->getMock(
