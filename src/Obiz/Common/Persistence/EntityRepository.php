@@ -21,7 +21,7 @@ abstract class EntityRepository
     /**
      * @var string
      */
-    protected $classNamespace;
+    protected $entityClassNamespace;
 
     /**
      * Strategy for different data access strategies.
@@ -34,13 +34,13 @@ abstract class EntityRepository
      * Initializes a new EntityRepository.
      *
      * @param \Doctrine\DBAL\Connection
-     * @param string $classNamespace
+     * @param string $entityClassNamespace
      * @param \Obiz\Common\Persistence\StrategyProvider $provider
      */
-    public function __construct($conn, $classNamespace, StrategyProvider $provider)
+    public function __construct($conn, $entityClassNamespace, StrategyProvider $provider)
     {
         $this->conn = $conn;
-        $this->classNamespace = $classNamespace;
+        $this->entityClassNamespace = $entityClassNamespace;
         $this->provider = $provider;
     }
 
@@ -53,7 +53,7 @@ abstract class EntityRepository
      */
     public function get($id)
     {
-        $entity = $this->provider->get($id, $this->classNamespace);
+        $entity = $this->provider->get($id, $this->entityClassNamespace);
 
         if(!$entity instanceof Entity) {
             throw new EntityNotFoundException();
