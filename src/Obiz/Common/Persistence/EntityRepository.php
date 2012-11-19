@@ -4,17 +4,25 @@ namespace Obiz\Common\Persistence;
 
 use Obiz\Common\Entity;
 use Obiz\Common\Persistence\StrategyProvider;
-use Doctrine\ORM\EntityRepository as DoctrineEntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * Entity repository that provides a set of useful data fecthing methods.
  *
  * @author Daniel Ribeiro <daniel@obiz.com.br>
  */
-abstract class EntityRepository extends DoctrineEntityRepository
+abstract class EntityRepository
 {
+    /**
+     * @var \Doctrine\DBAL\Connection
+     */
+    protected $conn;
+
+    /**
+     * @var string
+     */
+    protected $classNamespace;
+
     /**
      * Strategy for different data access strategies.
      *
@@ -25,14 +33,15 @@ abstract class EntityRepository extends DoctrineEntityRepository
     /**
      * Initializes a new EntityRepository.
      *
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param \Doctrine\ORM\Mapping\ClassMetadata $class
+     * @param \Doctrine\DBAL\Connection
+     * @param string $classNamespace
      * @param \Obiz\Common\Persistence\StrategyProvider $provider
      */
-    public function __construct($em, ClassMetadata $class, StrategyProvider $provider)
+    public function __construct($conn, $classNamespace, StrategyProvider $provider)
     {
+        $this->conn = $conn;
+        $this->classNamespace = $classNamespace;
         $this->provider = $provider;
-        parent::__construct($em, $class);
     }
 
     /**
@@ -44,7 +53,7 @@ abstract class EntityRepository extends DoctrineEntityRepository
      */
     public function get($id)
     {
-        $entity = $this->provider->get($id, $this->getClassMetadata()->getName());
+        $entity = $this->provider->get($id, $this->classNamespace);
 
         if(!$entity instanceof Entity) {
             throw new EntityNotFoundException();
