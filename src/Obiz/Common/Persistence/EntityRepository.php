@@ -53,7 +53,7 @@ abstract class EntityRepository
      */
     public function get($id)
     {
-        $entity = $this->provider->get($id, $this->entityClassNamespace);
+        $entity = $this->provider->get($id);
 
         if(!$entity instanceof Entity) {
             throw new EntityNotFoundException();
