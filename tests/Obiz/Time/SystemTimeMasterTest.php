@@ -8,15 +8,23 @@ namespace Obiz\Common\Time;
  *
  * @author Julien Roubieu <julien@obiz.com.br>
  */
-class SystemTimeMaster implements TimeMaster
+class SystemTimeMasterTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Returns the current unix timestamp.
-     *
-     * @return timestamp
-     */
-    public function time()
+    public function assertPreConditions()
     {
-    	return time();
+        $this->assertTrue(
+            class_exists($class = 'Obiz\Common\Time\SystemTimeMaster'),
+            'Class not found: ' . $class);
+    }
+
+    public function testTimeMethod()
+    {
+        $systemTimeMaster = $this->getMock('Obiz\Common\Time\SystemTimeMaster');
+
+        $systemTimeMaster->expects($this->once())
+                         ->method('time')
+                         ->will($this->returnValue(time()));
+
+        $this->assertEquals(time(), $systemTimeMaster->time());
     }
 }
