@@ -2,6 +2,8 @@
 
 namespace Obiz\Common\Time;
 
+use \DateTime;
+
 /**
  * Provides an abstration to get system time, so that
  * time management can be mocked in tests.
@@ -23,8 +25,8 @@ class SystemTimeMasterTest extends \PHPUnit_Framework_TestCase
 
         $systemTimeMaster->expects($this->once())
                          ->method('time')
-                         ->will($this->returnValue(time()));
+                         ->will($this->returnValue(new DateTime()));
 
-        $this->assertEquals(time(), $systemTimeMaster->time());
+        $this->assertEquals(new DateTime(), $systemTimeMaster->time());
     }
 }
