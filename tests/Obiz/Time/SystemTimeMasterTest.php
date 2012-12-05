@@ -21,12 +21,12 @@ class SystemTimeMasterTest extends \PHPUnit_Framework_TestCase
 
     public function testTimeMethod()
     {
-        $systemTimeMaster = $this->getMock('Obiz\Common\Time\SystemTimeMaster');
+        $systemTimeMaster = new SystemTimeMaster();
+        $currentTime = new DateTime();
 
-        $systemTimeMaster->expects($this->once())
-                         ->method('time')
-                         ->will($this->returnValue(new DateTime()));
+        $diff = $systemTimeMaster->time()->diff($currentTime);
+        $maxSleepSeconds = 1;
 
-        $this->assertEquals(new DateTime(), $systemTimeMaster->time());
+        $this->assertLessThanOrEqual($maxSleepSeconds, $diff->s);
     }
 }
