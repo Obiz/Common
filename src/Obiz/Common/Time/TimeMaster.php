@@ -14,7 +14,8 @@ interface TimeMaster
 {
     /**
      * Returns the current time.
-     * @return DateTime
+     * 
+     * @return \DateTime
      */
     public function time();
 }
