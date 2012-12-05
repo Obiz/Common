@@ -2,6 +2,8 @@
 
 namespace Obiz\Common\Time;
 
+use \DateTime;
+
 /**
  * Provides an abstration to get system time, so that
  * time management can be mocked in tests.
@@ -12,7 +14,7 @@ interface TimeMaster
 {
     /**
      * Returns the current time.
-     * @return timestamp
+     * @return DateTime
      */
     public function time();
 }

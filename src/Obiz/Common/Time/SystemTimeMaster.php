@@ -2,6 +2,8 @@
 
 namespace Obiz\Common\Time;
 
+use \DateTime;
+
 /**
  * Provides an abstration to get system time, so that
  * time management can be mocked in tests.
@@ -11,12 +13,10 @@ namespace Obiz\Common\Time;
 class SystemTimeMaster implements TimeMaster
 {
     /**
-     * Returns the current unix timestamp.
-     *
-     * @return timestamp
+     * @return \DateTime
      */
     public function time()
     {
-    	return time();
+    	return new DateTime();
     }
 }
