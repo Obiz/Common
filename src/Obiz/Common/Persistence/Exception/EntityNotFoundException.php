@@ -1,6 +1,6 @@
 <?php
 
-namespace Obiz\Guga\Persistence\Exception;
+namespace Obiz\Common\Persistence\Exception;
 
 use \Exception;
 
