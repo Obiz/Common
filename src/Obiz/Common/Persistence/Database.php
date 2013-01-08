@@ -14,5 +14,5 @@ interface Database
      *
      * @param string $query
      */
-    public function execute($query);
+    public function query($query);
 }
